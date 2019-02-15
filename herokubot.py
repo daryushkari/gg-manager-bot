@@ -6,6 +6,7 @@ import time
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, BaseFilter
 from telegram import Message, User, Chat, MessageEntity, Document
 from random import randint
+import duel
 
 games = ['R6','R6','R6', 'RL', 'RL', 'RL', 'Apex']
 stickerCount = {}
@@ -135,6 +136,8 @@ if __name__ == "__main__":
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('roll', roll))
     dp.add_handler(CommandHandler('randomgame', randomgame))
+    dp.add_handler(CommandHandler('start_duel', duel.start_duel))
+    dp.add_handler(CommandHandler('shot!', duel.shot))
     dp.add_handler(MessageHandler((Filters.text & (~ Filters.entity(MessageEntity.MENTION))), processText))
     dp.add_handler(MessageHandler((Filters.sticker | Filters.animation), processSticker))
     dp.add_handler(MessageHandler(Filters.all, antiFlood))
